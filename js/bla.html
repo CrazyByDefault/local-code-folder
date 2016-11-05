@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<input id="myTextBox" type="text" name="blabla">
+
+	<button id="button" onclick="clicker();">Click this</button>
+
+</body>
+
+<script type="text/javascript">
+	var stuff;
+
+		function clicker(){
+
+			stuff = document.getElementById('myTextBox').value;			
+			console.log(stuff)
+			document.getElementById('button').text = "Wtf";
+		}
+</script>
+
+</html>
+
+
