@@ -18,11 +18,11 @@ void main(){
 			
 			
 			if(!(i/10))printf(" ");
-			printf("%d ", i);
+			printf("%d ", i+1);
 			i++;
 		}
 
-		//printf("\n");
+		printf("\x1B[B\e[1C");
 		//s++;
 		
 		
@@ -30,4 +30,4 @@ void main(){
 			
 			
 	}printf("\n");
-}
+} 
