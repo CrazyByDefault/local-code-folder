@@ -76,7 +76,7 @@ void main(){
 
 	int i, d=1;
 
-	printf("\n \x1B[A\e[%dC %s\n", x, monthNames[m]);
+	printf("\n \x1B[A\e[%dC %s\n", x, monthNames[m-1]);
 	for(i = dayOfWeek(1, m, y); d <=md[l][m-1]; i++){
 
 		if(i == 7){
@@ -86,7 +86,10 @@ void main(){
 		}else{
 		
 			x = x + i*2;
-			printf("\x1B[A\e[%dC %d", x, d);
+			//printf("\x1B[A\e[%dC %d", x, d);
+			
+			//if(!(d/10))printf(" ");
+			printf("%d ", d);
 			d++;
 		}
 	}
