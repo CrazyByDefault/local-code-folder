@@ -1,9 +1,12 @@
 #include <stdio.h>
 
+//Declare an array to store the days from the correct location to the correct location, for each month
 int a[12][6][7];
 
+//Declare and initialize variables such that moveLeft and moveRight work properly
 int prevChoice = 0, prevMonth = 0, prevYear = 0;
 
+//Just a bunch of constants
 int md[2][12] = {
  		
  		//Normal year -
@@ -21,7 +24,7 @@ char *threeMonths[4] = {"January		     February   	     March", "April		       M
 int l=0;
 
 
-
+//Gives the int corresponding to the day of the week, eg 0 for Sunday, 1 for Monday etc
 int dayOfWeek(int d, int m, int y){
 	int days;
 
@@ -62,19 +65,20 @@ int dayOfWeek(int d, int m, int y){
 	//printf("%s \n", names[x]);
 }
 
+//Assigns zero to all values in a[][][]
 void zeroArray(){
 	int i, j, k;
 	for(k = 0; k < 12; k++){
 		for(i = 0; i < 6; i++){
 			for (int j = 0; j < 7; j++){
 				a[k][i][j] = 0;
-				/*b[i][j] = 0;
-				c[i][j] = 0;*/
+				
 			}
 		}
 	}
 }
 
+//Print a single month when called
 int printMonth(){
 	int m, y;
 
@@ -132,9 +136,11 @@ int printMonth(){
 	return 0;
 }
 
+//Print the whole year
 int printYear(){
 	int y;
 
+	//Check if input needs to be accepted
 	if(prevChoice != 1){
 		printf("Enter the year\n");
 		scanf("%d", &y);
@@ -142,10 +148,11 @@ int printYear(){
 		prevYear = y;
 	}else y = prevYear;
 
+	//Check if its a leap year
 	if(y%4 == 0)l = 1;
 	if(y%100 ==0 && y%400 != 0)l = 0;
 
-
+	//Check if input is proper
 	if(y < 1900 || y > 2016){
 		printf("Please enter a valid date.\n");
 		return -1;
@@ -166,12 +173,12 @@ int printYear(){
 		
 		}
 	}
-	int balls = 0;
+	int p = 0;
 	for(k = 0; k < 10; k += 3){
 		// printf("K = %d\n", k);
 		printf("\t\t\t      %d\n", y);
-		printf("\t%s\n", threeMonths[balls]);
-		balls++;
+		printf("\t%s\n", threeMonths[p]);
+		p++;
 		for(j = 0; j < 3; j++){
 			for(i = 0; i < 7; i++)printf("%s ", dayNames[i]);
 			printf("  ");
@@ -196,7 +203,7 @@ int printYear(){
 				else printf("%d ", a[k+1][i][j]);
 
 
-			}
+			}//Switch to next month, same line here
 			printf("  ");
 
 			for(j = 0; j < 7; j++){
@@ -217,7 +224,7 @@ int printYear(){
 	return 0;
 }
 
-
+//Move right for whatever corresponding mode
 int moveRight(){
 	if(prevChoice == 0 || prevYear == 0)return -1;
 	
@@ -239,6 +246,8 @@ int moveRight(){
 	}
 }
 
+
+//Move left, similar to moveRight()
 int moveLeft(){
 	if(prevChoice == 0 || prevYear == 0)return -1;
 	
@@ -260,6 +269,7 @@ int moveLeft(){
 	}
 }
 
+//Display the menu. If a function executes succesfully (with return value 0) then it calls itself
 int calendarMenu(){
 	printf("Calendar Menu\n1:Display Year\n2:Display Month\n3:Move right\n4:Move left\n5:Exit\n");
 	int choice;
@@ -291,7 +301,10 @@ int calendarMenu(){
 
 
 int main(){
+
+	//Make the array fully zero at the beginning
 	zeroArray();
+	//call the menu, and exit if it returns.
 	return calendarMenu();
 
 }
