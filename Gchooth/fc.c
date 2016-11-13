@@ -1,10 +1,10 @@
 #include <stdio.h>
-long prod(int x, int y);
-int div(int x, int y);
-int mod(int x, int y);
+long multiply(int x, int y);
+int divide(int x, int y);
+int modulo(int x, int y);
 float sqrrt(float x);
-int pw(int x, int y);
-int ln(int x);
+int power(int x, int y);
+int log(int x);
 
 int main(){
 	int option,num1,num2;
@@ -15,7 +15,9 @@ int main(){
 		printf("Menu:\n1.Add\n2.Multiply\n3.Divide\n4.Substract\n5.Modulus\n6.Square\n7.Square root\n8.Log\n9.Exit\nEnter the option, Please\n");
 		scanf("%d",&option);//take input from user	
 		switch(option){
-		case 1:
+		case 1:printf("Menu:\n1:Add\n2:Multiply\n3:Divide\n4:Subtract\n5:Modulus\n6:Square\n7:Square Root\n8:Log\n9:Exit\n");
+	int choice;
+	scanf("%d", &choice);
 			printf("enter two numbers\n");
 			scanf("%d %d",&num1,&num2);
 			printf("The sum is %d\n",num1+num2);
@@ -23,7 +25,7 @@ int main(){
 		case 2:
 			printf("enter two numbers\n");
 			scanf("%d %d",&num1,&num2);
-			a=prod(num1,num2);
+			a=multiply(num1,num2);
 			printf("The product is %lu\n",a);
 			break;
 		case 3:
@@ -40,13 +42,13 @@ int main(){
 		case 5:
 			printf("enter two numbers\n");
 			scanf("%d %d",&num1,&num2);
-			num1=mod(num1,num2);
+			num1=modulo(num1,num2);
 			printf("The remainder is %d\n",num1);
 			break;
 		case 6:
 			printf("enter a number\n");
 			scanf("%d",&num1);
-			num2=prod(num1,num1);
+			num2=multiply(num1,num1);
 			printf("The square of %d is %d\n",num1,num2);
 			break;
 		case 7:
@@ -58,7 +60,7 @@ int main(){
 		case 8:
 			printf("enter a number\n");
 			scanf("%d", &num1);
-			num2=ln(num1);
+			num2=log(num1);
 			printf("log of %d is %d\n",num1,num2);
 			break;
 		default:
@@ -79,7 +81,7 @@ long prod(int x, int y){
 	return ans;
 }
 //function to divide
-int div(int x, int y){
+int divide(int x, int y){
 	int i=0;
 	while(x>=y){
 		x=x-y;
@@ -88,7 +90,7 @@ int div(int x, int y){
 	return i;
 }
 //function to find mod
-int mod(int x, int y){
+int modulo(int x, int y){
 	while(x>=y){
 		x=x-y;
 	}
@@ -107,7 +109,7 @@ float sqrrt(float x){
 return m;
 }
 //exponential function
-int pw(int x, int y){
+int power(int x, int y){
 	int power=1,i=0;
 	for(i;i<y;i++){
 	power=prod(power,x);
@@ -115,10 +117,10 @@ int pw(int x, int y){
 	return power;
 }
 //log of a number
-int ln(int x){
+int log(int x){
 	int i,y;
 	for(i=1;i<=x;i++){
-		if(pw(2,i)<x&&pw(2,i+1)>=x){
+		if(power(2,i)<x&&power(2,i+1)>=x){
 			y=i+1;
 			break;
 		}
