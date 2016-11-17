@@ -23,7 +23,6 @@ char *threeMonths[4] = {"January		     February   	     March", "April		       M
 //Determine if year is a leap year
 int l=0;
 
-
 //Gives the int corresponding to the day of the week, eg 0 for Sunday, 1 for Monday etc
 int dayOfWeek(int d, int m, int y){
 	int days;
@@ -47,7 +46,7 @@ int dayOfWeek(int d, int m, int y){
 			//If the current month is reached, 
 			days = days + d;
 			
-			break;
+			break;month
 		}
 		else{
 
