@@ -25,6 +25,14 @@ int arrayChecker(){
 
 	for(i = 0; i < l; i++){
 
+		if(a[i] != '0' || a[i] != '1' || a[i] != '2' || a[i] != '3' || a[i] != '4' || a[i] != '5'
+			|| a[i] != '6' || a[i] != '7' || a[i] != '8' || a[i] != '9' || a[i] != '(' || a[i] != ')'
+			|| a[i] != '*' || a[i] != '/' || a[i] != '+' || a[i] != '-'){
+
+			flag = 2;
+			break;
+
+		}
 		if(a[i] == '(')ob++;
 		if(a[i] == ')')cb++;
 		if(a[i] == '*' || a[i] == '/' || a[i] == '+' || a[i] == '-'){
@@ -39,10 +47,17 @@ int arrayChecker(){
 	if(ob != cb){
 		printf("Opening and cosing brackets do not match.\n");
 		return -1;
-	}else if(flag){
+	}else if(flag == 1){
 		printf("Invalid operation.\n");
 		return -1;
+	}else if(flag == 2){
+		printf("Invalid characters in expression - use only digits, operators or brackets.\n");
+		return -1;
 	}else return 0;
+
+}
+
+void evaluate(){
 
 }
 
