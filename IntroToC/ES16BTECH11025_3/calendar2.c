@@ -46,7 +46,7 @@ int dayOfWeek(int d, int m, int y){
 			//If the current month is reached, 
 			days = days + d;
 			
-			break;month
+			break;
 		}
 		else{
 
