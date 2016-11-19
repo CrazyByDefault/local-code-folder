@@ -119,6 +119,7 @@ void evaluate(int q, int l){
 			a[i] = 'x';
 			a[j-1] = 'x';
 			evaluate(i+1, j);
+			break;
 		}
 
 		if((a[i] == '*' || a[i] == '/') && p>0){
@@ -156,8 +157,9 @@ void evaluate(int q, int l){
 			}
 
 			p--;
+
 			printf("%s\n", a);
-			
+			//break;
 		}
 
 		if((a[i] == '+' || a[i] == '-') && p == 0){
@@ -197,6 +199,7 @@ void evaluate(int q, int l){
 		}
 
 		printf("%s\n", a);
+		// break;
 		
 		
 
@@ -228,7 +231,13 @@ int main(){
 
 		evaluate(0, l);
 		
-		printf("%s\n", a);
+		for(i = 0; i < l; i++){
+
+			if(a[i] == '\0')break;
+			if(a[i] != 'x')printf("%c", a[i]);
+
+		}
+		printf("\n");
 		return 0;
 	
 	}else return -1;
