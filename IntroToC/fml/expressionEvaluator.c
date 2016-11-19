@@ -17,6 +17,11 @@ int isDigit(char c, int i){
 				return 1;
 			}else return 0;
 
+		case 2:
+			if(c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9' || c == '('){
+				return 1;
+			}else return 0;
+
 		case 0:
 			if(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9'){
 				return 1;
@@ -44,15 +49,23 @@ int arrayChecker(){
 			ob++;
 		}
 		if(a[i] == ')'){
-			if(!isDigit(a[i-1], 0))flag = 1;
+			if(!isDigit(a[i-1], -1))flag = 1;
 			if(a[i+1] != '*' && a[i+1] != '/' && a[i+1] != '+' && a[i+1] != '-' && a[i+1] != ')' && isDigit(a[i+1], 0))flag = 1;
 			cb++;		
 		}
-		if(a[i] == '*' || a[i] == '/' || a[i] == '+' || a[i] == '-'){
+		if(a[i] == '*' || a[i] == '+' || a[i] == '-'){
 
 			if(!isDigit(a[i-1], -1) || !isDigit(a[i+1], 1)){
 				flag = 1;
 			}
+		}
+
+		if(a[i] == '/'){
+
+			if(!isDigit(a[i-1], -1) || !isDigit(a[i+1], 2)){
+				flag = 1;
+			}
+
 		}
 
 	}
@@ -113,14 +126,9 @@ void evaluate(int q, int l){
 			if(a[i+1] == '(')continue;
 			int n = 0, m = 0, x, y, z;
 
-			for(x = i-1; (isDigit(a[x], 0)  || a[x] == 'x'); x--){
-				int place = 1, tens = 1, u, hitNumber = 0;
-				if(isDigit(a[x], 0)){
-					hitNumber = 1;
-				}
+			for(x = i-1; isDigit(a[x], 0); x--){
+				int place = i - 1 - x, tens = 1, u;
 
-				if(a[x] == 'x' && !hitNumber)continue;
-				if(a[x] == 'x' && hitNumber)break;
 				for(u = 0; u < place; u++){
 					tens = tens*10;
 				}
@@ -157,17 +165,11 @@ void evaluate(int q, int l){
 			if(a[i+1] == '(')continue;
 			int n = 0, m = 0, x, y, z;
 
-			for(x = i-1; (isDigit(a[x], 0)  || a[x] == 'x'); x--){
-				int place = 0, tens = 1, u, hitNumber = 0;
-				if(isDigit(a[x], 0)){
-					hitNumber = 1;
-				}
+			for(x = i-1; isDigit(a[x], 0); x--){
+				int place = i - 1 - x, tens = 1, u;
 
-				if(a[x] == 'x' && !hitNumber)continue;
-				if(a[x] == 'x' && hitNumber)break;
 				for(u = 0; u < place; u++){
 					tens = tens*10;
-					place++;
 				}
 				n = n + tens*(a[x] - '0');
 			}
