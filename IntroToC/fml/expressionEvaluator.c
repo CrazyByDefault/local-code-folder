@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 
+//declare the variables we'll use throughout
 char a[10000];
 int ops = 0;
 
-//Checks if a char is a number or the correct type of bracket. Returns 1 if everything is ok, 0 if not.
+//Checks if a char is a number or the correct type of bracket. Returns 1 if everything is ok, 0 if not. Has various modes, based on the int argument.
 int isDigit(char c, int i){
 	switch(i){
 		case -1:
@@ -30,6 +31,7 @@ int isDigit(char c, int i){
 }
 
 
+//Checks if array is valid
 int arrayChecker(){
 	int i, flag = 0, ob = 0, cb = 0;
 	int l = strlen(a);
@@ -84,10 +86,12 @@ int arrayChecker(){
 
 }
 
+//evaluates the string from positions q to l. We replace all positions of the array a[] that we don't need with 'x'. They're skipped whenever encountered.
 void evaluate(int q, int l){
-	printf("IT ENTERED EVALUATE with q = %d and l = %d!\n", q, l);
+	//printf("IT ENTERED EVALUATE with q = %d and l = %d!\n", q, l);
 	int i, p = 0, o = 0;
 
+	//Check how many high precedence operators are present in the given substring, outside of brackets
 	for(i = q; i < l; i++){
 		if(a[i] == 'x')continue;
 
@@ -103,8 +107,9 @@ void evaluate(int q, int l){
 		}if(a[i] == '*' || a[i] == '/')p++;
 
 	}
-	printf("IT CALCULATED P - %d\n", p);
+	//printf("IT CALCULATED P - %d\n", p);
 
+	//If a bracket is encountered, find its corresponding closing bracket and send everything in it to evaluate() again.
 	for(i = q; i < l; i++){
 		if(a[i] == 'x')continue;
 
@@ -122,13 +127,16 @@ void evaluate(int q, int l){
 			break;
 		}
 
+
+		//If a high precedence operator is found, evaluate it.
 		if((a[i] == '*' || a[i] == '/') && p>0){
-			printf("Found a * or /\n");
+			//printf("Found a * or /\n");
 			if(a[i+1] == '(')continue;
-			int n = 0, m = 0, x, y, z;
+			long long int n = 0, m = 0, z;
+			int x, y;
 
 			for(x = i-1; isDigit(a[x], 0); x--){
-				int place = i - 1 - x, tens = 1, u;
+				long long int place = i - 1 - x, tens = 1, u;
 
 				for(u = 0; u < place; u++){
 					tens = tens*10;
@@ -140,7 +148,7 @@ void evaluate(int q, int l){
 				if(a[y] != 'x')m = 10*m + (a[y] - '0');
 			}
 
-			printf("n = %d and m = %d\n", n, m);
+			//printf("n = %d and m = %d\n", n, m);
 
 			if(a[i] == '*'){
 				z = n*m;
@@ -158,17 +166,19 @@ void evaluate(int q, int l){
 
 			p--;
 
-			printf("%s\n", a);
+			//printf("%s\n", a);
 			//break;
 		}
 
+		//Check if all hogh precedence operators have been evaluated, and then do the low precedence operations
 		if((a[i] == '+' || a[i] == '-') && p == 0){
-			printf("Found a + or -\n");
+			//printf("Found a + or -\n");
 			if(a[i+1] == '(')continue;
-			int n = 0, m = 0, x, y, z;
+			long long int n = 0, m = 0, z;
+			int x, y;
 
 			for(x = i-1; isDigit(a[x], 0); x--){
-				int place = i - 1 - x, tens = 1, u;
+				long long int place = i - 1 - x, tens = 1, u;
 
 				for(u = 0; u < place; u++){
 					tens = tens*10;
@@ -180,7 +190,7 @@ void evaluate(int q, int l){
 				if(a[y] != 'x')m = 10*m + (a[y] - '0');
 			}
 			
-			printf("n = %d and m = %d\n", n, m);
+			//printf("n = %d and m = %d\n", n, m);
 
 			if(a[i] == '+'){
 				z = n+m;
@@ -198,19 +208,20 @@ void evaluate(int q, int l){
 
 		}
 
-		printf("%s\n", a);
+		//printf("%s\n", a);
 		// break;
 		
 		
 
 	}
 
+	//Call the function till all the operators disappear.
 	do{
 		ops = 0;
 		for(i = q; i < l; i++)
 			if(a[i] == '*' || a[i] == '/' || a[i] == '+' || a[i] == '-')ops++;
 
-		printf("Total number of operators are %d\n", ops);
+		//printf("Total number of operators are %d\n", ops);
 		if(!ops)break;
 		evaluate(q, l);
 	}while(ops > 0);
@@ -220,13 +231,14 @@ void evaluate(int q, int l){
 int main(){
 	
 
+	//accept the expression, and stop only when a new line is encountered
 	scanf("%[^\n]s", a);
 	int l = strlen(a);
 	int i;
 	
 
 	
-
+	//check if array is valid, then evaluate
 	if(!arrayChecker()){
 
 		evaluate(0, l);
