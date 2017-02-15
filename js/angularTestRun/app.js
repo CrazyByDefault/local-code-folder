@@ -12,17 +12,20 @@ function($stateProvider, $urlRouterProvider) {
     	templateUrl: '/home.html',
     	controller: 'MainCtrl'
     });
-    
+
+  $stateProvider
     .state(
     'posts', {
-        url: '/posts/{id}',
-        templateUrl: '/posts.html',
-        controller: 'PostsCtrl'
+      	url: '/posts/{id}',
+      	templateUrl: '/posts.html',
+      	controller: 'PostsCtrl'
     });
 
     
 
-  //$urlRouterProvider.otherwise('home');
+    
+
+  $urlRouterProvider.otherwise('home');
 }]);
 
 app.factory('posts', [function(){
@@ -78,7 +81,7 @@ app.controller('PostsCtrl', [
 function($scope, $stateParams, posts){
 	$scope.post = posts.posts[$stateParams.id];
 
-	$scope.addComments = function(){
+	$scope.addComment = function(){
 		if ($scope.body === '') { return; }
 		$scope.post.comments.push({
 			body: $scope.body,
