@@ -4,6 +4,8 @@
 #include <math.h>
 
 int main(){
+	FILE* samplesFile;
+	samplesFile = fopen("samples.txt", "w");
 	time_t t;
 	int x; 
 	int i, j;
@@ -19,7 +21,7 @@ int main(){
 	printf("Generating %d random arrays of size %d each, and storing it in samples.txt\n", sample_size, n);
 
 	system("touch samples.txt");
-	system("echo \" \" > samples.txt");
+	system("> samples.txt");
 
 
 
@@ -34,10 +36,9 @@ int main(){
 			// printf("%d ", randomint);
 			strcat(array, element);
 		}
-		sprintf(writeToFile, "echo \'%s\' >> samples.txt", array);
+		fprintf(samplesFile, "%s\n", array);
 		array[0] = '\0';
-		system(writeToFile);
-
+		
 	}
 
 	/*This block of code compiles and runs quicksort1 with the argumnet size, as accepted from the user.*/
