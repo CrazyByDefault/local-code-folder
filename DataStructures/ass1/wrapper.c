@@ -1,22 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 
 int main(){
 	FILE* samplesFile;
 	samplesFile = fopen("samples.txt", "w");
 	time_t t;
-	int x; 
 	int i, j;
 	int n;
+	int sample_size;-
 
 	printf("Enter size of array you want to test\n");	
 	scanf("%d", &n);
 
-	printf("Choose number of arrays (sample size) -\n1. 10\n2. 100\n3. 1000\n4. 10000\n5. 100000\n");
-	scanf("%d", &x);
-	int sample_size = pow(10, x);
+	printf("Choose number of arrays (sample size) -\n");
+	scanf("%d", &sample_size);
+	
 
 	printf("Generating %d random arrays of size %d each, and storing it in samples.txt\n", sample_size, n);
 
