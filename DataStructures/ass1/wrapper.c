@@ -8,7 +8,7 @@ int main(){
 	time_t t;
 	int i, j;
 	int n;
-	int sample_size;-
+	int sample_size;
 
 	printf("Enter size of array you want to test\n");	
 	scanf("%d", &n);
@@ -19,8 +19,6 @@ int main(){
 
 	printf("Generating %d random arrays of size %d each, and storing it in samples.txt\n", sample_size, n);
 
-	system("touch samples.txt");
-	system("> samples.txt");
 
 
 
@@ -31,7 +29,8 @@ int main(){
 	for(i = 0; i < sample_size; i++){
 		for(j = 0; j < n; j++){
 			int randomint = rand()%100;
-			sprintf(element, "%d ", randomint);
+			if(randomint/10 == 0)sprintf(element, "%d  ", randomint);
+			else sprintf(element, "%d ", randomint);
 			// printf("%d ", randomint);
 			strcat(array, element);
 		}
@@ -39,6 +38,7 @@ int main(){
 		array[0] = '\0';
 		
 	}
+	fclose(samplesFile);
 
 	/*This block of code compiles and runs quicksort1 with the argumnet size, as accepted from the user.*/
 	printf("Compiling quicksort1...\n");
@@ -46,7 +46,7 @@ int main(){
 
 		printf("Compiled.\nRunning quicksort1...");
 		char qs1_call[300];
-		sprintf(qs1_call, "./quicksort1 %d", n);
+		sprintf(qs1_call, "./quicksort1 %d %d", n, sample_size);
 
 		int qs1_ret = system(qs1_call);
 
@@ -55,5 +55,6 @@ int main(){
 		return -1;
 	}
 
+	
 	return 0;
 }
