@@ -3,16 +3,7 @@
 #include <time.h>
 #include <string.h>
 
-FILE *samplesFile, *outputFile;
-
-int median(int a, int b, int c){
-	if(a < b && b < c)return b;
-	if(c < b && b < a)return b;
-	if(b < c && c < a)return c;
-	if(a < c && c < b)return c;
-	if(c < a && a < b)return a;
-	if(b < a && a < c)return a;
-}
+FILE *samplesFile, *outputFile, *randOutput;
 
 
 
@@ -23,22 +14,32 @@ int main(int argc, char const *argv[]){
 	clock_t start_t, end_t;
 	time_t bla;
 	samplesFile = fopen("samples.txt", "r");
-	outputFile = fopen("output3.txt", "w");
+	outputFile = fopen("output2.txt", "w");
+	randOutput = fopen("randoms.txt", "w");
 
 	int randomint[n];
 	char element[3];
 	int array[n];
-	int outputArray[n];
 	char line[3*n];
 	int depth = 0;
+
+	//Generate as many random numbers as we might need
+	start_t = clock();
+	srand((unsigned) time(&bla));
+	for(i = 0; i < n; i++){
+		randomint[i] = rand();
+	}
+	end_t = clock();
+
+	double rand_gen_t = ((double) (end_t - start_t))/CLOCKS_PER_SEC;
+	rand_gen_t *= 1000;
 
 
 	void quicksort(int first, int last){
 		depth++;
 		if(first < last){
-			int lo = first, hi = last, mid = (last + first)/2;
-			int pivot = median(lo, hi, mid);
-
+			int lo = first, hi = last, pivot = randomint[depth];
+			pivot = first + randomint[depth]%(last - first);
 			// printf("first = %d, hi = %d, pivot = %d \n", first, lo, pivot);
 			//swap random thingy with last
 			int x = array[pivot];
@@ -88,26 +89,16 @@ int main(int argc, char const *argv[]){
 		depth = 0;
 		// printf("Calling quicksort\n");
 		quicksort(0, n - 1);
-
-		for(j = 0; j < n; j++){
-			if(array[j]/10 == 0)sprintf(element, "%d  ", array[j]);
-			else sprintf(element, "%d ", array[j]);
-			// printf("%d ", randomint);
-			strcat(outputArray, element);
-		}
 		end_t = clock();
 		double t = ((double) (end_t - start_t))/CLOCKS_PER_SEC;
 		t *= 1000;
-		fprintf(outputFile, "%s - sort time - %fms \n", outputArray, t);
-		outputArray[0] = '\0';
-			
-		
-		
-		// printf("\n");
+		fprintf(outputFile, "%f\n", t);
+		fprintf(randOutput, "%f\n", rand_gen_t);
 
 	}
 
 	fclose(outputFile);
+	fclose(randOutput);
 
 	
 

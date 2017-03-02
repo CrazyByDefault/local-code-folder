@@ -5,42 +5,39 @@
 
 FILE *samplesFile, *outputFile;
 
+//Function to find the median of 3 numbers. Not very efficient, should improve
+int median(int a, int b, int c){
+	if(a < b && b < c)return b;
+	else if(c < b && b < a)return b;
+	else if(b < c && c < a)return c;
+	else if(a < c && c < b)return c;
+	else if(c < a && a < b)return a;
+	else if(b < a && a < c)return a;
+}
+
 
 
 int main(int argc, char const *argv[]){
-	int i, j;
-	int n = atoi(argv[1]);
-	int sample_size = atoi(argv[2]);
+	//Define variables we need
+	int i, j, n = atoi(argv[1]), sample_size = atoi(argv[2]);
 	clock_t start_t, end_t;
 	time_t bla;
 	samplesFile = fopen("samples.txt", "r");
-	outputFile = fopen("output2.txt", "w");
+	outputFile = fopen("output3.txt", "w");
 
-	int randomint[n];
 	char element[3];
 	int array[n];
-	int outputArray[n];
 	char line[3*n];
-	int depth = 0;
-
-	//Generate as many random numbers as we might need
-	start_t = clock();
-	srand((unsigned) time(&bla));
-	for(i = 0; i < n; i++){
-		randomint[i] = rand();
-	}
-	end_t = clock();
-
-	double rand_gen_t = ((double) (end_t - start_t))/CLOCKS_PER_SEC;
+	
 
 
 	void quicksort(int first, int last){
-		depth++;
 		if(first < last){
-			int lo = first, hi = last, pivot = randomint[depth];
-			pivot = first + randomint[depth]%(last - first);
-			// printf("first = %d, hi = %d, pivot = %d \n", first, lo, pivot);
-			//swap random thingy with last
+			int lo = first, hi = last, mid = (last + first)/2;
+			int pivot = median(lo, hi, mid);
+
+			
+			//swap chosen pivot with last
 			int x = array[pivot];
 			array[pivot] = array[hi];
 			array[hi] = x;
@@ -60,7 +57,6 @@ int main(int argc, char const *argv[]){
 
 
 			//Swap pivot into right position
-			// printf("Swapping %d with pivot %d \n", array[hi], array[pivot]);
 			x = array[hi];
 			array[hi] = array[pivot];
 			array[pivot] = x;
@@ -71,8 +67,11 @@ int main(int argc, char const *argv[]){
 	}
 
 	for(i = 0; i < sample_size; i++){
+
+		//Extract the first array from samples.txt as a string
 		fgets(line, 3*n, samplesFile);
 
+		//Turn the string into an int array
 		for(j = 0; j < n; j++){
 			element[0] = line[3*j];
 			element[1] = line[3*j+1];
@@ -81,34 +80,22 @@ int main(int argc, char const *argv[]){
 			array[j] = atoi(element);
 			
 		}
-		fgets(line, 3*n, samplesFile);
+		fgets(line, 3*n, samplesFile); //Somehow prevents the IO buffer from misbehaving.
 		
 		line[0] = '\0';
-		start_t = clock();
-		depth = 0;
-		// printf("Calling quicksort\n");
-		quicksort(0, n - 1);
 
-		for(j = 0; j < n; j++){
-			if(array[j]/10 == 0)sprintf(element, "%d  ", array[j]);
-			else sprintf(element, "%d ", array[j]);
-			// printf("%d ", randomint);
-			strcat(outputArray, element);
-		}
+		//Call quicksort on the extracted array and time it.
+		start_t = clock();
+		quicksort(0, n - 1);
 		end_t = clock();
 		double t = ((double) (end_t - start_t))/CLOCKS_PER_SEC;
 		t *= 1000;
-		fprintf(outputFile, "%s - sort time - %fms - random number generation time - %fms \n", outputArray, t, rand_gen_t);
-		outputArray[0] = '\0';
-			
-		
-		
-		// printf("\n");
+
+		// Print time take to output3.txt
+		fprintf(outputFile, "%f\n", t);
 
 	}
 
 	fclose(outputFile);
-
-	
 
 }
