@@ -67,7 +67,7 @@ int main(int argc, char const *argv[]){
 		fgets(line, 3*n, samplesFile);
 		
 		line[0] = '\0';
-		t = clock();
+		// t = clock();
 		depth = 0;
 		printf("Calling quicksort\n");
 		quicksort(0, n - 1);
@@ -78,15 +78,17 @@ int main(int argc, char const *argv[]){
 			// printf("%d ", randomint);
 			strcat(outputArray, element);
 		}
-		t = clock() - t;
-		t = t/CLOCKS_PER_SEC;
-
-		fprintf(outputFile, "%s - %f \n", outputArray, t);
+		fprintf(outputFile, "%s\n", outputArray);
 		outputArray[0] = '\0';
+			
 		
+		// t = clock() - t;
 		// printf("\n");
 
 	}
-	fclose(outputFile);	
+
+	fclose(outputFile);
+
+	
 
 }
