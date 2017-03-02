@@ -44,7 +44,7 @@ int main(){
 	printf("Compiling quicksort1...\n");
 	if(!system("gcc -w -o quicksort1 quicksort1.c")){
 
-		printf("Compiled.\nRunning quicksort1...");
+		printf("Compiled.\nRunning quicksort1...\n\n");
 		char qs1_call[300];
 		sprintf(qs1_call, "./quicksort1 %d %d", n, sample_size);
 
@@ -52,6 +52,21 @@ int main(){
 
 	}else{
 		printf("Error compiling quicksort1. Exiting...\n");
+		return -1;
+	}
+
+
+	printf("Compiling quicksort2...\n");
+	if(!system("gcc -w -o quicksort2 quicksort2.c")){
+
+		printf("Compiled.\nRunning quicksort2...");
+		char qs1_call[300];
+		sprintf(qs1_call, "./quicksort2 %d %d", n, sample_size);
+
+		int qs1_ret = system(qs1_call);
+
+	}else{
+		printf("Error compiling quicksort2. Exiting...\n");
 		return -1;
 	}
 
