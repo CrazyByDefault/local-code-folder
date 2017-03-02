@@ -10,7 +10,7 @@ int main(){
 	int n;
 	int sample_size;
 
-	printf("Enter size of array you want to test\n");	
+	printf("Enter size of array you want to test\n");
 	scanf("%d", &n);
 
 	printf("Choose number of arrays (sample size) -\n");
