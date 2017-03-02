@@ -23,44 +23,29 @@ int main(int argc, char const *argv[]){
 	int depth = 0;
 
 	void quicksort(int first, int last){
-		depth++;
-		printf("\nDEPTH = %d \n", depth);
+		int lo = first, hi = last, pivot = last;
 
-		if(first != last){
-			int lo = first, hi = last, pivot = last;
-			int i, j;
-			
-			printf("first = lo = %d, hi = %d, pivot = %d\n", lo, hi, pivot);
-			for(i = first; i < hi; i++)printf("%d ", array[i]);
-			printf("\[%d\]\n", array[pivot]);
-			if(lo >= hi)return;
-			
-			while(lo < hi){
-				while(array[lo] < array[pivot] && lo < hi) lo++;
-				while(array[pivot] <= array[hi] && hi > lo) hi--;
+		while(lo < hi){
+			while(array[lo] < array[pivot] && lo < hi) lo++;
+			while(array[hi] >= array[pivot]) hi--;
 
-				//Swap array[lo] and array[hi]
-				if(lo < hi){
-					printf("Swapping %d and %d \n", array[lo], array[hi]);
-					int x = array[lo];
-					array[lo] = array[hi];
-					array[hi] = x;
-				}
+			//Swap
+			if(lo < hi){
+				printf("Swapping %d with %d\n", array[lo], array[hi]);
+				int x = array[hi];
+				array[hi] = array[lo];
+				array[lo] = x;
 			}
-			printf("lo = %d, hi = %d, pivot = %d\n", lo, hi, pivot);
-
-			//when lo = hi
-			
-			printf("Swapping pivot %d with %d \n", array[pivot], array[hi]);
-			int x = array[pivot];
-			array[pivot] = array[hi];
-			array[hi] = x;
-
-			if(first < hi)quicksort(first, hi-1);
-			if(hi < last)quicksort(hi, last);
-
 		}
 
+		//Swap pivot into right position
+		printf("Swapping %d with pivot %d \n", array[hi], array[pivot]);
+		int x = array[hi];
+		array[hi] = array[pivot];
+		array[pivot] = x;
+
+		quicksort(first, hi-1);
+		quicksort(hi+1, last);
 	}
 
 	for(i = 0; i < sample_size; i++){
