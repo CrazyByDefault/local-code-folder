@@ -1,0 +1,70 @@
+<!-- <!DOCTYPE html> -->
+<html>
+<head>
+	<script type="text/javascript">
+		var basePath 			= "http://192.168.0.103:9090/aims";
+		var versionPath 		= "http://192.168.0.103:9090/aims/version9.2.6";
+		var appDefYrStart 		= "1950";
+		var defaultDate 		= "dd M, yy";
+		var defaultMonthYear 	= "M, yy";
+		var defaultTime 		= "hh:mm";
+		var defaultDateTime 	= "dd M, yy";
+		var defaultPageSize 	= "15";
+		
+		var encryptionDefMode 	= 2;
+		var encrApplicationMode = 1;
+		var encrSessionMode 	= 2;
+		var appEsigSecReqKey		= "appEsigSecReqKey";
+		var appEsigSecTypeOTP		= 1;
+		var appEsigSecTypeCaptcha	= 2;
+		var securityData 			= {"entityId":0,"topURL":"/login/loginHome","isSecurityRequired":false,"OTP":1,"CAPTCHA":2,"LOGINUSERPWD":3}
+		var esigKey 				= "appEsigSecReqKey";
+		var groupWebsite	 		= "http://www.iith.ac.in";
+		var hasGroupWebsite	 		= true;
+		var popupCloseKeycode		= 27;
+		var applicationSourceId 	= null;
+		var aimsApp					= -1;
+		var employerApp				= 10;
+		var facultyApp				= 19;
+		var phdAdmApp				= 24;
+		var mtechAdmApp				= 25;
+		var mdesAdmApp				= 27;
+		var mphilAdmApp				= 26;
+		var executiveMtechAdmApp	= 28;
+		var recStaffApp				= 20;
+	</script>
+
+	<title>Teri Maa Ki</title>
+	<script src="http://localhost:3030/json2.js" type="text/javascript"></script>
+	<script src="http://localhost:3030/jquery.js" type="text/javascript"></script>
+	<script src="http://localhost:3030/layout.js" type="text/javascript"></script>
+	<script src="http://localhost:3030/plianto-security.js" type="text/javascript"></script>
+	<!-- <script src="http://localhost:3030/header.js" type="text/javascript"></script> -->
+
+	<link href="http://192.168.0.103:9090/aims/version9.2.6/css/common/header.css" rel="stylesheet" type="text/css" />
+	<link href="http://192.168.0.103:9090/aims/version9.2.6/css/common/layout.css" rel="stylesheet" type="text/css" />
+	<link href="http://192.168.0.103:9090/aims/version9.2.6/images/company/title_img.png" rel="shortcut icon" />
+</head>
+<body>
+<script src="http://localhost:3030/jsTimezoneDetect.js" type="text/javascript"></script>
+<script src="http://localhost:3030/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+<script src="http://localhost:3030/jquery.jcryption-1.1.js" type="text/javascript"></script>
+<script src="http://localhost:3030/login.js" type="text/javascript"></script> 
+
+
+<form method="post" id="loginForm" action="http://192.168.0.103:9090/aims/login/loginHome">
+	<input type="hidden" id="timeZone" name="timeZone" />
+	<div class="email-div row">
+		<input type="email" value="" id="uid" spellcheck="false" text="Login Id" class="fld" autocomplete="off" />
+		<input type="hidden" name="loginId" id="loginId"  value=""/>
+	</div>
+	<div class="passwd-div row">
+		<input type="password" name="password"  id="pswrd" class="fld" text="Password" autocomplete="off" />
+	</div>
+	
+	<input type="button" value="Sign in" id="login" name="signIn" class="btn loginBton" style="margin-right: 6px;" />
+	<span class="loadngImgSml loginBtn"></span>
+</form>
+
+</body>
+</html>

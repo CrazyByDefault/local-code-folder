@@ -1,1 +1,1 @@
-Rey Bhanu, nee maama lanjja pukka.
+Rey Bhanu, nee maama lanjja pukka
