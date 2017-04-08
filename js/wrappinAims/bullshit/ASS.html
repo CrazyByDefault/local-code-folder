@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0046)http://192.168.0.103:9090/aims/login/loginHome -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+		
+		
+		
+		<script type="text/javascript">
+			var basePath 			= "/aims";
+			var versionPath 		= "/aims/version9.2.7";
+			var appDefYrStart 		= "1950";
+			var defaultDate 		= "dd M, yy";
+			var defaultMonthYear 	= "M, yy";
+			var defaultTime 		= "hh:mm";
+			var defaultDateTime 	= "dd M, yy";
+			var defaultPageSize 	= "15";
+			
+			var encryptionDefMode 	= 2;
+			var encrApplicationMode = 1;
+			var encrSessionMode 	= 2;
+			var appEsigSecReqKey		= "appEsigSecReqKey";
+			var appEsigSecTypeOTP		= 1;
+			var appEsigSecTypeCaptcha	= 2;
+			var securityData 			= {}
+			var esigKey 				= "appEsigSecReqKey";
+			var groupWebsite	 		= "http://www.iith.ac.in";
+			var hasGroupWebsite	 		= true;
+			var popupCloseKeycode		= 27;
+			var applicationSourceId 	= -1;
+			var aimsApp					= -1;
+			var employerApp				= 10;
+			var facultyApp				= 19;
+			var phdAdmApp				= 24;
+			var mtechAdmApp				= 25;
+			var mdesAdmApp				= 27;
+			var mphilAdmApp				= 26;
+			var executiveMtechAdmApp	= 28;
+			var recStaffApp				= 20;
+		</script>
+		<script src="./ASS_files/json2.js" type="text/javascript"></script>
+		<script src="./ASS_files/jquery.js" type="text/javascript"></script>
+		<script src="./ASS_files/layout.js" type="text/javascript"></script>
+		<script src="./ASS_files/plianto-security.js" type="text/javascript"></script>
+		<script src="./ASS_files/header.js" type="text/javascript"></script>
+	 
+		<link href="./ASS_files/header.css" rel="stylesheet" type="text/css">
+		<link href="./ASS_files/layout.css" rel="stylesheet" type="text/css">
+		<link href="http://192.168.0.103:9090/aims/version9.2.7/images/company/title_img.png" rel="shortcut icon">
+		
+		<title>IITH-AIMS-LIVE Instance</title>
+	</head>
+	
+	<body id="body">
+		<input id="reloadValue" type="hidden" name="reloadValue" value="1489647832680">
+		<input id="pbky" type="hidden" name="pbky" value="null">
+		<script type="text/javascript">
+			var reloadInd 		= false;
+			var ctrlDown 		= false;
+			var ctrlKey = 17, f5Key = 116, rKey = 82;
+			/*
+			 * This script is to refresh the page if the current page is loaded by pressing back button
+			 */
+	       	jQuery(document).ready(function() {
+	   			$(document).keydown(function( e ) {
+	   			    if( e.keyCode == f5Key ) {
+	   			        //F5 pressed. Copy your code here or try
+	   			        //It will avoid if-modified-since requests.
+	   			        e.preventDefault( );
+	   			        reloadInd = true;
+			    		localStorage.isAimsPageLoaded = true;
+	   	                location.reload();
+	   			    } else if( e.keyCode == ctrlKey ) {
+				        ctrlDown = true;
+	   			    } else if( ctrlDown && ( e.keyCode == rKey ) ) {
+	   			        //Ctrl + R pressed. Do whatever you want
+				        //or copy the same code here that you did above
+				        e.preventDefault( );
+				        reloadInd = true;
+			    		localStorage.isAimsPageLoaded = true;
+		                location.reload();
+				    }
+	   			}).keyup(function(e) {
+	   			    if (e.keyCode == ctrlKey) {
+	   			        ctrlDown = false;
+	   			    }
+	   			});
+	           	var d = new Date();
+	          	d = d.getTime();
+	         	if (jQuery('#reloadValue').val().length == 0) {
+	                jQuery('#reloadValue').val(d);
+	                jQuery('body').show();
+	            } else {
+	            	jQuery('#reloadValue').val('');
+		    		if(	typeof(Storage) !== "undefined" &&
+		    			typeof localStorage.isAimsPageLoaded == "undefined") {
+	                    location.reload();
+		    		}
+		    	}
+			});
+		</script>
+		<div id="popUp" class="popUp"></div>
+		<div id="glair"></div>
+		<div id="loading_bar"><img src="./ASS_files/progress_bar.gif"></div>
+		<div id="main">
+			<div id="maintable" style="padding: 0x;">
+			    <div class="headMain" style="background: #008EBD">
+			    	<div class="header">
+			       		
+<div class="logoDiv">
+	<img class="logo" id="plianto_logo" style="float: left;" src="./ASS_files/writeLogoImg" alt="No Logo">
+	<span class="logoTxt" style="cursor: auto;float: left;margin-top: 5px;">IIT Hyderabad</span>
+</div>
+
+					    <div class="errDiv gAppBannerDiv">
+					    	<span class="closeIcon banner"></span>
+				    		<span class="errImg"></span><span id="errTxt"></span>
+					    </div>
+					    <div class="warnDiv gAppBannerDiv">
+					    	<span class="closeIcon banner"></span>
+				    		<span class="warnImg"></span><span id="warnTxt"></span>
+					    </div>
+					    <div class="successDiv gAppBannerDiv">
+					    	<span class="closeIcon banner"></span>
+				    		<span class="successImg"></span><span id="successTxt"></span>
+					    </div>
+			    	</div>
+			    </div>
+			    <div class="clear"></div>
+			    <div class="contentMain">
+		       		<div class="contentMainDiv login" style="min-height: 490px;">
+				    	
+
+
+
+<script src="./ASS_files/form-validator.js"></script>
+
+<div>
+	<div class="formHrd">
+		<span>Captcha Verfication Form</span>
+		<div class="clear"></div>
+	</div>
+	<div class="formDiv" style="margin-left: 189px;">
+		<div style="float:left;" class="row">
+			<img alt="Captcha is being loaded" style="height:50px;border:1px solid #CCCCCC; padding:2px;" class="rightDiv" id="appCaptchaLoginImg" src="./ASS_files/243771">
+			<span class="capchaRefresh" id="loginCapchaRefresh" title="Reload Captcha" style="float: right; margin-top: 2px;margin-left: 5px;"></span>
+		</div>
+	</div>
+	<div class="formDiv" style="margin-left: 235px;">
+		<label class="rightDiv" style="font-weight:bold;">Enter the above text:</label>
+	</div>
+	<div class="formDiv" style="margin-left: 189px;">
+		<div style="float:left;" class="row">
+			<input type="text" class="rightDiv fld preq" id="captcha" style="width: 216px;">
+		</div>
+	</div>
+	<div class="formDiv">
+		<label class="leftDiv"></label>
+		<div class="rightDiv">
+			<input type="button" value="Submit" id="submit" class="btn save appOTPPopDtl">
+			<input type="button" value="Cancel" id="cancel" class="btn red appOTPPopDtl">
+			<span class="loadngImgSml"></span>
+		</div>
+		<div class="clear"></div>
+	</div>	
+</div>
+<script>
+	$(function() {
+		$("#captcha").focus();
+		$("#submit").click(function() {
+			var validateParams = [];
+			validateParams.push({"id":"captcha", "required":true, "caption":"Text", "maxLen": "10"});
+			if(bindFormToButton(validateParams)) {
+				submitForm();
+			}
+		});
+
+		$("#loginCapchaRefresh").click(function() {
+			addBtnDisabled("loadngImgSml", "appOTPPopDtl");
+			
+			callOldAjaxAfterSecurity({
+				
+				"url" 	: "/captcha/generateLoginCaptcha",
+				"type"	: "POST",
+				"resp"	: afterCaptchaResendSuccess(),
+				"error"	: afterCaptchaResendErr()
+				
+			});
+			
+		});
+		
+		$("#cancel").click(function() {
+			logOut();
+		});
+
+		$("#captcha").keyup(function(e) {
+			if(e.keyCode == 13) {
+				$("#submit").click();
+			}
+		});
+	});
+	function submitForm() {
+		addBtnDisabled("loadngImgSml", "appOTPPopDtl");
+		callOldAjaxAfterSecurity({
+			"url" 	: "/captcha/verifyLoginCaptcha/?appEsigSecReqKey=" + 
+																		$.trim($("#captcha").val()),
+			"type" 	: "POST", 
+			"resp"	: afterLoginCaptchaSuccess(), 
+			"error"	: afterLoginCaptchaErr() 
+		});
+	}
+	function afterCaptchaResendSuccess() {
+		return function(transId) {
+			removeBtnDisabled("loadngImgSml", "appOTPPopDtl");
+			$("#appCaptchaLoginImg").attr("src", basePath+"/captcha/getCaptcha/"+transId);
+			$("#captcha").val("").focus();
+		};
+	}
+	function afterCaptchaResendErr() {
+		return function() {
+			removeBtnDisabled("loadngImgSml", "appOTPPopDtl");
+		};
+	}
+	function afterLoginCaptchaSuccess() {
+		return function(resp) {
+			window.top.location.href = basePath + "/login/home";
+		};
+	}
+	function afterLoginCaptchaErr() {
+		return function() {
+			removeBtnDisabled("loadngImgSml", "appOTPPopDtl");
+		};
+	}
+</script>
+
+				    </div>
+				    <div class="clear"></div>
+			    </div>
+			    <div class="clear"></div>
+			    <div class="footerMain" style="background: #008EBD">
+		        	<div class="footer">
+		        		
+
+
+<script>
+	$(function() {
+		$(".contentMainDiv").css("min-height", ($(document).height() - 125)+"px");
+		$('form:first *:input[type != hidden]:first').focus();
+		$('form:first *:input[readonly != readonly]:first').focus();
+		$('form:first *:input[disabled != disabled]:first').focus();
+		var errInd 			= false;
+		var exceptionStatus = "null";
+		var exceptionData 	= "null";
+		if("" != "") {
+			showException("");
+			errInd = true;
+		} else if(exceptionData != "" && exceptionData != "null") {
+			showException(exceptionData);
+			errInd = true;
+		} else if(exceptionStatus != "" && exceptionStatus != "null") {
+			showException(exceptionStatus);
+			errInd = true;
+		}
+		
+		if("" != "") {
+			$("").focus();
+		} else if("null" != "") {
+			$("null").focus();
+		} else if(false) {
+			$('null').focus();
+		}
+		if(errInd) {
+			
+		}
+		if(isCacheSupports && typeof localStorage.isAimsPageLoaded != "undefined") {
+			delete localStorage.isAimsPageLoaded;
+		}
+		//Add document help icon
+/* 		var appDocFileId = "";
+		if(appDocFileId != "") {
+			$(".contentMain").append('<span class="url_doc_help_icon" id="appPageHelp" title="Help Document"></span>');
+			$("#appPageHelp").css({	"position" : "absolute", 
+									"left" : $(".contentMainDiv").offset().left + 15 +
+											 $(".contentMainDiv").width(), 
+									"top" : "5px", "padding-bottom" : "inherit"});
+			$("#appPageHelp").click(function() {
+				window.top.location.href = basePath + "/base/appPageDocFileDownLoad/"+appDocFileId;
+			});
+		} */
+	});
+</script>
+<div style="font-size: 19px; float: right;">
+	<span class="prwdBy">Powered By </span>
+	<img alt="PLIANTO" src="./ASS_files/plianto_logo.png" class="prwdByImg">
+</div>
+
+
+		        	</div>
+			    </div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				noBack();
+				window.onload = noBack;
+				window.onpageshow = function(evt) { if (evt.persisted) noBack(); }
+				window.onunload = function() { void (0); }
+			});
+			function noBack() {
+			     window.history.forward();
+			}
+		</script>
+	
+	
+
+</body></html>
