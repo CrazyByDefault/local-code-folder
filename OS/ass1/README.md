@@ -1,12 +1,8 @@
 # Computing Collatz Sequence in a forked process (POSIX IPC Assignment)  
 
-## Running the code:  
+## Overview:  
 
-```
-$ gcc Assgn1Src-ES16BTECH11025.c -lrt
-$ ./a.out
-<enter a number>
-```
+The aim of the assignment is to implement IPC through *POSIX Shared Memory*. The system calls used are `shm_open()` to open the shared memory, `ftruncate()` to allocate space to the shared memory segment, and `shm_unlink()` to close the shared memory segment. 
 
 ## Explanation: 
 
@@ -22,7 +18,7 @@ The shared memory segment is established before forking so that its descriptor c
 The process is forked, and a `switch...case` conditional is employed to differentiate between the child and the parent.  
   
 
-```
+```C
 switch(pid = fork()) {
 	case -1:
 		// Error forking
@@ -40,7 +36,7 @@ switch(pid = fork()) {
 The child process accepts a number and verifies if it's greater than 1. It then computes the collatz sequence and stores it in a dynamically sized integer array.  
   
 
-```
+```C
 scanf("%d", &x);
 if(x < 1){
 	printf("ERROR: Enter a number greater than 1.\n");
@@ -56,7 +52,7 @@ for (i = 0; x != 1; i++){
 The shared memory segment is then resized to have the same size as the array, and the array is copied into the shared memory segment using `memcpy` from the string.h library.  
   
 
-```
+```C
 ftruncate(memd, i*sizeof(int));
 memcpy(mmap(NULL, i*sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED, memd, 0), n, (i+1)*sizeof(int));
 ```
@@ -68,14 +64,14 @@ After this, the child process exits with a *return value equal to the size of th
 
 The parent process waits for the child process to end, and stores return status in `int prv`. From this, the exact return value is extracted and stored in `prv`.  
 
-```
+```C
 wait(&prv);
 prv = WEXITSTATUS(prv);
 ```  
 
 It checks if the child executed succesfully, and if it did, it reads the shared memory segment using `mmap()` and stores its contents in an integer array `n[]`. The contents of `n[]` are then printed.
   
-```
+```C
 n = mmap(NULL, prv*sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED, memd, 0);
 for (i = 0; i <= prv; i++){
 	printf("%d\t", n[i]);
