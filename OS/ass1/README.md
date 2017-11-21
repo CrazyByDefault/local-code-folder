@@ -59,10 +59,11 @@ memcpy(mmap(NULL, i*sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED, memd, 0), n
 
 After this, the child process exits with a *return value equal to the size of the array.*  
 `exit(i);`  
+This return value is used in the parent process so that we can read the exact amount of memory as is necessary.
 
 ### Parent Process:
 
-The parent process waits for the child process to end, and stores return status in `int prv`. From this, the exact return value is extracted and stored in `prv`.  
+The parent process waits for the child process to end, and stores return status in `int prv`. From this, the exact return value (which is the size of the array stored in the shared memory segment) is extracted and stored in `prv`.  
 
 ```C
 wait(&prv);
