@@ -51,13 +51,13 @@ int main() {
 
 This code generates a total of *8 processes*, as can be seen below -
 
-![8 Processes, image needs internet](https://i.imgur.com/m0KyRLG.png)
+![8 Processes, image needs internet](http://i.imgur.com/m0KyRLG.png)
 
 In general, consecutive calls on `fork()` will generate 2<sup>n</sup> processes.
 
 
 ## Problem 3.14
-#### Using the program in [Figure 3.34](https://i.imgur.com/vu6AgRp.png), identify values of `pid` at lines A, B, C and D, given that `pid` of parent and child are `2600` and `2603`.
+#### Using the program in [Figure 3.34](http://i.imgur.com/vu6AgRp.png), identify values of `pid` at lines A, B, C and D, given that `pid` of parent and child are `2600` and `2603`.
 
 At line A: We're printing the return value of the `fork()` call from the child process, which is 0.  
 `child: pid = 0`
@@ -75,7 +75,7 @@ At line D: We're calling `getpid()` from the parent process. This will return th
 ## _Extra Credit Question_
 #### Describe any 10 fields in the Linux Process Control Block (PCB)
 
-The Linux PCB is internally called `task_struct` in the source code. The members of `task_struct` are defined in the [sched.h file](http://elixir.free-electrons.com/linux/latest/source/include/linux/sched.h) in the source tree. Here, we attempt to understand some 10 fields of the struct.
+The Linux PCB is internally called `task_struct` in the source code. The members of `task_struct` are defined in the [sched.h file](http://elixir.free-electrons.com/linux/latest/source/include/linux/sched.h) in the source tree. Here, we attempt to understand some 12 fields of the struct.
 
 - `volatile long state`  
 This field keeps track of the state of the process. In general, if it is -1, the process is unrunnable, if it's 0 it's runnable, if it's >0, it's stopped. The exact states are defined using `TASK_RUNNING`, `TASK_INTERRUPTIBLE`, `TASK_UNINTERRUPTIBLE`, `TASK_STOPPED`, 
