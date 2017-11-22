@@ -49,9 +49,8 @@ int main() {
 }
 ```
 
-This code generates a total of *8 processes*, as can be seen below -
+This code generates a total of *8 processes*, as can be seen here - http://i.imgur.com/m0KyRLG.png
 
-![8 Processes, image needs internet](http://i.imgur.com/m0KyRLG.png)
 
 In general, consecutive calls on `fork()` will generate 2<sup>n</sup> processes.
 
