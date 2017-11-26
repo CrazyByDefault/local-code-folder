@@ -7,7 +7,6 @@ struct Node {
 	struct Node *right;
 };
 
-
 void printTree(struct Node *root, int gap) {
 	if (root == NULL) return;
 
@@ -18,7 +17,7 @@ void printTree(struct Node *root, int gap) {
 	int i;
 	for (i = 5; i < gap; i++)
 		printf(" ");
-	
+
 	printf("%d\n", root->value);
 
 	printTree(root->left, gap);
@@ -36,23 +35,24 @@ struct Node *newNode(int value) {
 }
 
 void insert(int x, struct Node* *pAddr) {
-	printf("insert called\n");
+
 	struct Node *parent = *pAddr;
-	if (parent == NULL) {
-		*pAddr = newNode(x);
-		printf("Inserted\n");
-	} 
-	else{
-		if (parent->value > x) {
-			printf("Moved left\n");
-			insert(x, &(parent->left));
-		}
-		else{
-			printf("Moved right\n");
-			insert(x, &(parent->right));
-		}
+	if (parent == NULL) *pAddr = newNode(x);
+
+	else {
+		if (parent->value > x) insert(x, &(parent->left));
+		else insert(x, &(parent->right));
 	}
-	printTree(root, 0);
+	// printTree(root, 0);
+}
+
+struct Node *searchMin(struct Node* node) {
+	struct Node *current = node;
+	
+	while (current->left != NULL)
+		current = current->left;
+
+	return current;
 }
 
 int search(int value, struct Node *parent) {
@@ -62,16 +62,29 @@ int search(int value, struct Node *parent) {
 	else if (parent-> value < value) search(value, parent->right);
 }
 
-void delete(int value) {
-	int found = 0;
-	while (!found) {
-		if (parent == NULL) {
-			printf("Doesn't exist in tree\n");
-			break;
+struct Node *delete(struct Node *node, int value) {
+	
+	if (node == NULL) return node;
+
+	if (node->value > value) node->left = delete(node->left, value);
+	else if (node->value < value) node->right = delete(node->right, value);
+
+	else {
+		if (node->left == NULL) {
+			struct Node *temp = node->right;
+			free(node);
+			return temp;
 		}
-		else if (parent->value == value) found = 1;
-		else if (parent->value > value) parent = parent->left;
-		else if (parent-> value < value) parent = parent->right;
+		else if (node->right == NULL) {
+			struct Node *temp = node->left;
+			free(node);
+			return temp;
+		}
+
+		struct Node *temp = searchMin(node->right);
+		node->value = temp->value;
+		node->right = delete(node->right, temp->value);
+
 	}
 
 }
@@ -112,7 +125,7 @@ void menu(int choice) {
 		case 3:
 			printf("\nEnter value of node to delete\n");
 			scanf("%d", &x);
-			delete(x);
+			root = delete(root, x);
 			printTree(root, 0);
 			menu(0);
 			break;
@@ -125,13 +138,6 @@ void menu(int choice) {
 }
 
 int main() {
-	// int x;
-	// scanf("%d", &x);
-
-	// root = newNode(x);
-	// root->left = newNode(x+1);
-	// root->right = newNode(x-1);
-	// printTree(root, 0);
 
 	menu(0);
 
