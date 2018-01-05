@@ -1,13 +1,13 @@
-#include <stdio.h>
+#include <iostream>
 #include <string.h>
 
-void main(){
-	char balls[500];
+using namespace std;
 
-	int n;
-	scanf("%d", &n);
+// int foo(int a, int b = 5) { return a+b; }
 
-	scanf("%s", balls);
-	
-	printf("\n%c\n%d\n", balls[n], strlen(balls));
+int foo(int a) { return a*5; }
+
+int main(){
+	std::cout << foo(5);
+	return 0;
 }
