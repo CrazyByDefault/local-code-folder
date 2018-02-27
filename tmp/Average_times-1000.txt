@@ -1,0 +1,38 @@
+---------TAS---------
+Thread 0 0.055
+Thread 1 0.055
+Thread 2 0.049
+Thread 3 0.05
+Thread 4 0.057
+Thread 5 0.054
+Thread 6 0.055
+Thread 7 0.05
+Thread 8 0.051
+Thread 9 0.054
+0.053
+
+---------CAS---------
+Thread 0 0.049
+Thread 1 0.035
+Thread 2 0.045
+Thread 3 0.05
+Thread 4 0.053
+Thread 5 0.052
+Thread 6 0.04
+Thread 7 0.057
+Thread 8 0.055
+Thread 9 0.039
+0.0475
+
+---------TAS_Bounded---------
+Thread 0 0.054
+Thread 1 0.054
+Thread 2 0.055
+Thread 3 0.053
+Thread 4 0.052
+Thread 5 0.054
+Thread 6 0.054
+Thread 7 0.052
+Thread 8 0.055
+Thread 9 0.054
+0.0537

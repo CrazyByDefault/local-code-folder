@@ -1,0 +1,26 @@
+
+---------TAS---------
+Thread 0 0.056
+Thread 1 0.0516667
+Thread 2 0.0536667
+Thread 3 0.05
+Thread 4 0.051
+Thread 5 0.054
+Thread 6 0.0516667
+Thread 7 0.0533333
+Thread 8 0.0536667
+Thread 9 0.0523333
+0.0527333
+
+---------CAS---------
+Thread 0 0.0476667
+Thread 1 0.0396667
+Thread 2 0.0546667
+Thread 3 0.0503333
+Thread 4 0.0523333
+Thread 5 0.0536667
+Thread 6 0.05
+Thread 7 0.0506667
+Thread 8 0.0483333
+Thread 9 0.0543333
+0.0501667
