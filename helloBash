@@ -41,3 +41,5 @@ unset -v lastclr
 typeset -a colrs
 trap 'tput sgr0; echo' EXIT
 ${KSH_VERSION+. doKsh} ${BASH_VERSION+doBash}
+
+# Sexysounds comment yoohoo
